@@ -1,0 +1,237 @@
+<html><head>
+<title>Se connecter</title>
+
+<meta name="viewport" />
+
+<style type="text/css">
+	
+	@keyframes bg {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+#bg {
+
+	height:120%;
+	width:120%;
+	left:-10%;
+	top:-10%;
+	position: fixed;
+	z-index:0;
+	background-size: 400% 400%;
+	animation: bg 30s ease infinite;
+
+	
+
+}
+
+#tout {
+
+	position:fixed;
+	top:40%;
+
+}
+
+#title {
+
+	color:white;
+	font-size:40px;
+	font-weight:normal;
+	width:100%;
+	text-align:center;
+	z-index:1;
+	position:fixed;
+	font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	transition: 1s;
+
+}
+
+.placeholder {
+
+	position:relative;
+	width:200px;
+	height:40px;
+	padding:10px;
+	border-radius: 7.5px;
+	background-color:white;
+	border:solid 2px white;
+}
+
+
+
+.submit {
+
+	position:relative;
+	width:auto;
+	height:40px;
+	padding:10px;
+	border-radius: 7.5px;
+	background-color:transparent;
+	border:solid 2px white;
+	margin-left:10px;
+	transition:0.5s;
+	color:white;
+	
+	
+}
+
+.submit:hover {
+	
+	background-color:#fff;
+	border:solid 2px #fff;
+    color:rgb(126, 126, 126);
+
+}
+
+
+
+#placeholders {
+
+	position:fixed;
+	margin-top:80px;
+	width:100%;
+	text-align:center;
+}
+
+#error {
+
+	width:100%;
+	text-align:center;
+	margin-top:10px;
+	color:white;
+	position:absolute;
+	font-size:20px;
+	transition: 0.75s;
+	font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif	;
+	opacity:0;
+
+}
+
+#copyright {
+
+	position:fixed;
+	bottom:10px;
+	right:15px;
+	color:white;
+	font-size:15px;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	font-weight: bold;
+}
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="password/password.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="parallax/parallax.js"></script>
+
+</head>
+
+<body>
+	<div id="bg"></div>
+
+
+	<div id="tout">
+		<div id="title">Connexion</div>
+		<div id="placeholders">
+			<input id="placeholder1" class="placeholder" name="placeholder1" type="password" placeholder="Mot de passe" onkeypress="if(event.keyCode == 13){GetArduinoInputs('totality')}" required>
+			<button id="submit" class="submit" onclick="GetArduinoInputs('totality')">Se connecter</button>
+			<div id="error">Mot de passe erroné..</div>
+		</div>
+
+
+		<div id="copyright">©STI2D</div>
+
+
+	</div>
+
+	<script>
+
+      		/* yeah i know this is not secured at all but i don't care it's just for the example */
+
+      	var arrayBg = ["#93291E,#ED213A" , "#56ab2f,#a8e063" , "#396afc,#2948ff" , "#00b09b,#96c93d" , "#FDC830,#F37335" , "#f953c6,#b91d73" , "#8E2DE2,#4A00E0" , "#0f0c29,#302b63"];
+	
+		
+		document.getElementById("bg").style.background = "linear-gradient(270deg," + arrayBg[Math.floor(Math.random() * arrayBg.length)] +")";
+
+	</script>
+	<script>
+		var currentX = '';
+		var currentY = '';
+		var movementConstant = -0.02;
+		var movementConstant2 = 0.01
+		$(document).mousemove(function(e) {
+		  if(currentX == '') currentX = e.pageX;
+		  var xdiff = e.pageX - currentX;
+		  currentX = e.pageX;
+		   if(currentY == '') currentY = e.pageY;
+		  var ydiff = e.pageY - currentY;
+		  currentY = e.pageY; 
+
+		  $('#tout').each(function(i, el) {
+		      var movement = (i + 1) * (xdiff * movementConstant);
+			  var movementy = (i + 1) * (ydiff * movementConstant);
+		      var newX = $(el).position().left + movement;
+			  var newY = $(el).position().top + movementy;
+		      $(el).css('left', newX + 'px');
+			  $(el).css('top', newY + 'px');
+		  });
+		  $('#bg').each(function(i, el) {
+		      var movement = (i + 1) * (xdiff * movementConstant2);
+			  var movementy = (i + 1) * (ydiff * movementConstant2);
+		      var newX = $(el).position().left + movement;
+			  var newY = $(el).position().top + movementy;
+		      $(el).css('left', newX + 'px');
+			  $(el).css('top', newY + 'px');
+		  });
+		});
+	</script>
+
+<script>
+
+	
+
+</script>
+
+</body>
+<script type="text/javascript">
+	
+         	var code;
+
+	function GetArduinoInputs(URL_value)
+         {
+
+				
+             nocache = "&nocache=" + Math.random() * 1000000;
+             var request = new XMLHttpRequest();
+             request.onreadystatechange = function()
+             {
+                 if (this.readyState == 4 && this.status == 200) {
+                     
+                         if (this.responseXML != null) {
+
+							code=this.responseXML.getElementsByTagName('password')[0].childNodes[0].nodeValue;
+							
+                     }
+                 }
+             }
+             request.open("GET", URL_value + nocache, true);
+             request.send(null);
+             setTimeout('GetArduinoInputs(\'totality\')', 2000);
+             if (document.getElementById("placeholder1").value == code){
+
+             	window.location = "pages/index2.htm";
+				document.getElementById("title").innerHTML = "Content de vous revoir";
+             }
+
+             if (document.getElementById("placeholder1").value != code){
+
+             	document.getElementById("title").innerHTML = "Mot de passe éronné";
+             }
+         }
+
+
+
+         
+</script>
+</html>

@@ -1,0 +1,369 @@
+<html><head>
+<title>Ma station météo</title>
+<meta name="viewport" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<style type="text/css">
+
+@keyframes bg {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+#bg {
+
+	height:100%;
+	width:100%;
+	left:0px;
+	top:0px;
+	position: fixed;
+	z-index:0;
+	background:black;
+	background-size: 400% 400%;
+	animation: bg 30s ease infinite;
+
+}
+
+#title {
+
+	color:white;
+	font-size:55px;
+	font-weight: lighter;
+	width:100%;
+	text-align:left;
+	margin-left:10%;
+	z-index:1;
+	top:-60px;
+	position:fixed;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	transition:0.5s;
+	
+}
+
+#title:hover{
+	margin-left:10.5%;
+}
+
+#block {
+	position: absolute;
+	width:82%;
+	left:9%;
+	height:auto;
+	top:125px;
+	background:white;
+	border-radius: 20px;
+	padding:30px;
+	padding-top:17.5px;
+	display:block;
+	box-sizing: border-box;
+	opacity:0;
+	transition:1s;
+	margin-bottom:30px;
+}
+
+.texts {
+
+	color:#555;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.text {
+
+	font-size:20px;
+}
+
+.headers {
+
+	font-size:40px;
+	font-weight:450;
+}
+
+#block1 {
+
+	position: relative;
+	height:100%;
+	width:100%;
+	
+
+}
+
+#changePassword {
+
+	position:fixed;
+	width:auto;
+	height:40px;
+	padding:10px;
+	border-radius: 7.5px;
+	background-color:transparent;
+	border:solid 2px white;
+	right:10.5%;
+	top:-40px;
+	transition:0.5s;
+	color:white;
+	z-index:1;
+	cursor:pointer;
+}
+
+#changePassword:hover {
+
+	background-color:#fff;
+	border:solid 2px #fff;
+	color:rgb(126, 126, 126);
+}
+
+#notworking {
+
+	position:fixed;
+	width:160px;
+	height:auto;
+	background:#fff;
+	padding:10px;
+	border-radius:7.5px;
+	box-shadow:2px 2px 10px;
+	right:10.5%;
+	top:115px;
+	z-index:1;
+	opacity:0;
+	transition: 0.5s;
+}
+
+#topbar {
+
+	background:white;
+	color:#555;
+	width:100%;
+	position:fixed;
+	left:0;
+	top:0;
+	padding:15px;
+	padding-top:10px;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	opacity:0;
+	transition:0.5s;
+	backdrop-filter: blur(20px);
+	z-index:2;
+	box-shadow: black 0.5px 0px 5px;
+	height:0px;
+}
+
+</style>
+
+
+
+
+</head>
+
+<body onload="startAll() ">
+
+
+	<div id="bg"></div>
+		<div id="topbar">
+			<div class="headers" onclick="scrollTop()">Ma station météo</div>
+
+		</div>
+		<div id="title">Ma station météo</div>
+		<button id="changePassword" onclick="deconnexion()">Déconnexion</button>
+		<div id="notworking" class="texts">Cette fonction ne marche pas encore, le mot de passe par défaut est alpine.</div>
+		<div id="block">
+			<div id="block1">
+				<div id="header1" class="texts headers">Aujourd'hui</div>
+				<div id="text1" class="texts text"></div>
+				<div id="header2" class="texts headers">Météo</div>
+				<div id="text2" class="texts text"></div>		
+				<div id="text3" class="texts text">Pression : la pression actuelle est de 1 013,25 hPa</div>
+				<div id="text4" class="texts text">Vent : le vent souffle a 30 km/h</div>
+				<div id="header3" class="texts headers">Localisation</div>
+				<div id="text5" class="texts text">Votre station météo est à #ville#</div>
+				<div id="text6" class="texts text">Localisation exacte : #coordonées gps#</div>
+				<div id="header4" class="texts headers">Hier</div>
+				<div id="text7" class="texts text"></div>
+				<div id="text8" class="texts text">Il y a eu #pluviométrie# de pluie</div>
+				<div id="text8" class="texts text">Il y a eu #pluviométrie# de pluie</div>
+				<div id="text8" class="texts text">Il y a eu #pluviométrie# de pluie</div>
+				<div id="text8" class="texts text">Il y a eu #pluviométrie# de pluie</div>
+				<div id="text8" class="texts text">Il y a eu #pluviométrie# de pluie</div>
+				<div id="text8" class="texts text">Il y a eu #pluviométrie# de pluie</div>
+				<div id="text8" class="texts text">Il y a eu #pluviométrie# de pluie</div>
+				<div id="text8" class="texts text">Il y a eu #pluviométrie# de pluie</div>
+			</div>	
+			
+			
+		</div>
+<script type="text/javascript">
+		function deconnexion() {
+			window.location = "../index1.htm";
+		}
+</script>
+
+
+
+</body>
+<script type="text/javascript">	
+		function startAll() {
+
+					setTimeout(startAll,500);
+					animations();
+					setTimeout(time,500);
+					block();
+					GetArduinoInputs('totality');
+		}
+
+		function time(){
+
+			var today = new Date();
+
+			var s = today.getSeconds();
+			var h = today.getHours();
+			var m = today.getMinutes();
+			var d = today.getDate();
+			var hier = today.getDate() -1;
+			if (d < 10) {
+			d = "0" + today.getDate() 
+			}
+			var mois = "";
+			var M = today.getMonth() +1;
+			if (M < 10) {
+			M = "0" + M ; 
+			}
+			
+			var y = today.getFullYear();
+			m = checkTime(m);
+			s = checkTime(s);
+
+			var arrayMonth = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+
+			if(M == "01"){
+				mois = arrayMonth[0];
+			}
+			if(M == "02"){
+				mois = arrayMonth[1];
+			}
+			if(M == "03"){
+				mois = arrayMonth[2];
+			}
+			if(M == "04"){
+				mois = arrayMonth[3];
+			}
+			if(M == "05"){
+				mois = arrayMonth[4];
+			}
+			if(M == "06"){
+				mois = arrayMonth[5];
+			}
+			if(M == "07"){
+				mois = arrayMonth[6];
+			}
+			if(M == "08"){
+				mois = arrayMonth[7];
+			}
+			if(M == "09"){
+				mois = arrayMonth[8];
+			}
+			if(M == "10"){
+				mois = arrayMonth[9];
+			}
+			if(M == "11"){
+				mois = arrayMonth[10];
+			}
+			if(M == "12"){
+				mois = arrayMonth[11];
+			}
+
+			
+			var time = h  + ":" + m + ":" +s;
+			var date = d + " " + mois + " " + y;
+			
+
+			document.getElementById("text1").innerHTML = "Nous sommes le " + date + " et il est " + time;
+			document.getElementById("text7").innerHTML = "La température moyenne du " + hier + " "+ mois + " était de #température hier#"
+
+		}
+		
+		function checkTime(i) {
+			if (i < 10) {i = "0" + i}; 
+			return i;
+		}
+		
+		function animations(){
+			
+			document.getElementById("title").style.top = "40px";
+			document.getElementById("changePassword").style.top = "65px";
+			
+		}
+		function block(){
+			document.getElementById("block").style.opacity = "1";
+		}
+
+
+
+		var arrayBg = ["#93291E,#ED213A" , "#56ab2f,#a8e063" , "#396afc,#2948ff" , "#00b09b,#96c93d" , "#FDC830,#F37335" , "#f953c6,#b91d73" , "#8E2DE2,#4A00E0" , "#0f0c29,#302b63"];
+		
+		document.getElementById("bg").style.background = "linear-gradient(270deg," + arrayBg[Math.floor(Math.random() * arrayBg.length)] +")";
+	
+
+		
+
+		window.addEventListener('scroll', function() {
+			if(pageYOffset > 20){
+			
+				document.getElementById("title").style.opacity = "0";
+				document.getElementById("changePassword").style.opacity = "0";
+				document.getElementById("notworking").style.display = "none";
+				document.getElementById("topbar").style.opacity = "0.9";
+				document.getElementById("topbar").style.height = "50px";
+		  
+			  
+			} else {
+			
+				document.getElementById("title").style.opacity = "1";
+				document.getElementById("changePassword").style.opacity = "1";
+				document.getElementById("notworking").style.display = "block";
+				document.getElementById("topbar").style.opacity = "0";
+				document.getElementById("topbar").style.height = "0px";
+
+			}
+		  });
+
+								
+         function GetArduinoInputs(URL_value)
+         {
+				
+             nocache = "&nocache=" + Math.random() * 1000000;
+             var request = new XMLHttpRequest();
+             request.onreadystatechange = function()
+             {
+                 if (this.readyState == 4 && this.status == 200) {
+                     
+                         if (this.responseXML != null) {
+                         	var temperature = this.responseXML.getElementsByTagName('temperature')[0].childNodes[0].nodeValue;
+                         	var humidite = this.responseXML.getElementsByTagName('humidite')[0].childNodes[0].nodeValue;
+                         	
+                         	/*var altitude = this.responseXML.getElementsByTagName('altitude')[0].childNodes[0].nodeValue;
+                            var pression = this.responseXML.getElementsByTagName('pression')[0].childNodes[0].nodeValue;
+                            var luminosite = this.responseXML.getElementsByTagName('luminosite')[0].childNodes[0].nodeValue;
+                            var pluie = this.responseXML.getElementsByTagName('pluie')[0].childNodes[0].nodeValue;
+                            var pluieJour = this.responseXML.getElementsByTagName('pluieJour')[0].childNodes[0].nodeValue;
+                            var vitesseVent = this.responseXML.getElementsByTagName('vitesseVent')[0].childNodes[0].nodeValue;
+                            var directionVent = this.responseXML.getElementsByTagName('directionVent')[0].childNodes[0].nodeValue;*/
+
+                            	document.getElementById("text2").innerHTML = "Il fait actuellement " + temperature + " °C";  
+                            	document.getElementById("text3").innerHTML = "La pression de l'air est de " + humidite + " hPa";
+           
+                     }
+                 }
+             }
+             request.open("GET", URL_value + nocache, true);
+             request.send(null);
+             setTimeout('GetArduinoInputs(\'totality\')', 10000);
+         }
+
+
+       
+		 
+		 
+	</script>
+    
+
+</html>
